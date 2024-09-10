@@ -20,4 +20,4 @@ console.log(response3);
 alert('You answered ' + response3)
 
 alert("Thank you for your participation!")
-
+// 
