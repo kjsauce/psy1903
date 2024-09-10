@@ -1,6 +1,15 @@
-response1 = prompt('What is 5 + 3?');
-console.log(response1);
 
-response2 = prompt('What is 5 + 5?');
-console.log(response2);
-// order of operations usually top down //don't have to use let, but a good idea to use it
+let courseName = 'Programming for Psychologists';
+console.log(courseName.length); // Output: 29
+
+// Output the value for courseName translated to all capital letters.
+// Expected result: PROGRAMMING FOR PSYCHOLOGISTS
+console.log(courseName.toUpperCase());
+
+// Output the index position of the word 'Psychologists' within the string stored in courseName.
+// Expected result: 16
+console.log(courseName.indexOf('Psychologists'));
+
+// Output the value for courseName with the word 'Programming' replaced with the word 'Coding'.
+// Expected result: "Coding for Psychologists"
+console.log(courseName.replace("Programming", "Coding"));
