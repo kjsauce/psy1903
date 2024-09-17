@@ -11,3 +11,4 @@ https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script 
 https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started#anatomy_of_an_html_element 
 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul 
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
