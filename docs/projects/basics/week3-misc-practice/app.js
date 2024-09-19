@@ -25,13 +25,23 @@
 
 //alert(feedback + 'The expected answer is ' + (num1 + num2) + '.');
 
-let age = prompt('How old are you?');
-if (age < 12) {
-    alert('Child');
-}
-if (age >= 12 || age <= 18) {
-    alert('Teenager');
-}
-if (age >= 18) {
-    alert('Adult');
+//let age = prompt('How old are you?');
+//if (age < 12) {
+//alert('Child');
+//}
+//if (age >= 12 || age <= 18) {
+//alert('Teenager');
+//}
+//if (age >= 18) {
+//alert('Adult');
+//}
+
+let response = prompt('Enter a whole number.')
+even = (response % 2 == 0);
+odd = (response % 2 !== 0);
+
+if (response = even) {
+    alert("You entered an even number.")
+} else if (response = odd) {
+    alert("You enetered an odd number.")
 }
