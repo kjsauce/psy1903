@@ -6,15 +6,22 @@
 // console.log(celsiusToFahrenheit(10)); // Expected output: 50 (yes)
 // console.log(celsiusToFahrenheit(-5)); // 23 (yes)
 
-function convertTemp(temp, convertTo) {
-    let fahreneit = ((temp * 1.8) + 32);
-    let celsius = ((temp - 32) / 1.8);
-    if (convertTo == 'c') {
-        return celsius;
-    } else if (convertTo == 'f') {
-        return fahreneit;
-    }
+// function convertTemp(temp, convertTo) {
+// let fahreneit = ((temp * 1.8) + 32);
+// let celsius = ((temp - 32) / 1.8);
+// if (convertTo == 'c') {
+// return celsius;
+// } else if (convertTo == 'f') {
+//return fahreneit;
+//}
+//}
+
+//console.log(convertTemp(10, 'c')); // Expected output: -12.222222222222221
+//console.log(convertTemp(10, 'f')); // Expected output: 50
+
+function getWordLengths() {
+    let getWordLengths = words.map(wordslength => wordslength.length); //usign map to make a new array and wordslength to determine the # of characters in each string
 }
 
-console.log(convertTemp(10, 'c')); // Expected output: -12.222222222222221
-console.log(convertTemp(10, 'f')); // Expected output: 50
+let words = ['apple', 'banana', 'cherry', 'pear', 'grape'];
+console.log(getWordLengths(words)); // Expected output: [5, 6, 6, 4, 5]
