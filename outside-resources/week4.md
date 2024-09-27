@@ -5,6 +5,7 @@ AI Prompts
 - What property can help me find the number of characters in a string?
 - How can I use the length property to find the number of characters in each string 
 within an array?
+- How can you use a loop of an array through a function?
 
 
 Outside sites
