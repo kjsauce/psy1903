@@ -20,7 +20,7 @@ within an array?
 and I'm getting this error code app.js:44 Uncaught ReferenceError: numbers is not defined
     at getOddNumbers (app.js:44:24)
     at app.js:54:13
-
+- How to set up alert formatting to have multiple lines in javascript?
 
 Outside sites
 - https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Arrays 

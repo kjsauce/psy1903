@@ -52,23 +52,54 @@
 //console.log(getOddNumbers([1, 2, 3, 4, 5])); // Expected output: [1, 3, 5]
 //console.log(getOddNumbers([12, 45, 10, 11, 61])); // Expected output: [45, 11, 61]
 
-function filterNumbers(numbers, evenOrOdd) {
-    let results = [];
-    for (let number of numbers) {
-        if (evenOrOdd == 'odd' && number % 2 !== 0) {
-            results.push(number);
-        } else if (evenOrOdd == 'even' && number % 2 === 0) {
-            results.push(number);
-        }
-    }
-    return results
+// function filterNumbers(numbers, evenOrOdd) {
+//let results = [];
+//for (let number of numbers) {
+//if (evenOrOdd == 'odd' && number % 2 !== 0) {
+// results.push(number);
+//} else if (evenOrOdd == 'even' && number % 2 === 0) {
+//results.push(number);
+// }
+//}
+// return results
 
+//}
+
+//console.log(filterNumbers([1, 2, 3, 4, 5], 'even')); // Expected output: [2, 4]
+//console.log(filterNumbers([1, 2, 3, 4, 5], 'odd')); // Expected output: [1, 3, 5]
+
+//console.log(filterNumbers([45, 10, 11, 61], 'even')); // Expected output: [10]
+//console.log(filterNumbers([45, 10, 11, 61], 'odd')); // Expected output: [45, 11, 61]
+
+alert('Welcome to the even/odd response time task.\n\nYou are about to see a series of numbers.\n\nIf the number you see is EVEN type the letter "e".\nIf the number you see is ODD,type the letter "o".\n\nPlease answer as quickly and accurately as possible.');
+let results = [];
+
+function Even(number) {
+    return number % 2 === 0;
 }
 
+function Odd(number) {
+    return number % 2 !== 0;
+}
 
+for (let i = 0; i < 5; i++) {
+    let number = (Math.floor(Math.random() * 10) + 1);
+    let start = Date.now();
+    let odd = (number % 2 !== 0)
+    let even = (number % 2 == 0)
+    feedback = ""
+    let response = prompt('Number 1: ' + number + ' \n\Type the letter "e" for EVEN.\nType the letter "o" for ODD.');
+    let end = Date.now();
+    let responseTime = (end - start) / 1000;
+    if (Even(number) && response == "e") {
+        feedback = "correct";
+    } else if (Odd(number) && response == "o") {
+        feedback = 'correct';
+    } else {
+        feeback = ""
+    }
+    results.push([number, response, feedback, responseTime]);
+}
+console.log(results);
 
-console.log(filterNumbers([1, 2, 3, 4, 5], 'even')); // Expected output: [2, 4]
-console.log(filterNumbers([1, 2, 3, 4, 5], 'odd')); // Expected output: [1, 3, 5]
-
-console.log(filterNumbers([45, 10, 11, 61], 'even')); // Expected output: [10]
-console.log(filterNumbers([45, 10, 11, 61], 'odd')); // Expected output: [45, 11, 61]
+alert('Thank you for your time!')
