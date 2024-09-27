@@ -21,6 +21,7 @@ and I'm getting this error code app.js:44 Uncaught ReferenceError: numbers is no
     at getOddNumbers (app.js:44:24)
     at app.js:54:13
 - How to set up alert formatting to have multiple lines in javascript?
+- Can you use a function in place of a Boolean value that determines even or odd numbers?
 
 Outside sites
 - https://developer.mozilla.org/en-US/docs/Learn/JavaScript/First_steps/Arrays 
