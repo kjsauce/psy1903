@@ -16,7 +16,28 @@ let welcomeTrial = {
 };
 timeline.push(welcomeTrial);
 
-// Age Trials Begin
+// Questionnaire
+let likert_scale = [
+    "Strongly Disagree",
+    "Disagree",
+    "Neutral",
+    "Agree",
+    "Strongly Agree"
+];
+
+let questionnaire = {
+    type: jsPsychSurveyLikert,
+    questions: [
+        { prompt: "I enjoy solving math problems.", name: 'Math Problem', labels: likert_scale },
+        { prompt: "I find math easy.", name: 'Easy', labels: likert_scale },
+
+    ],
+    randomize_question_order: false
+};
+
+timeline.push(questionnaire);
+
+// Math Trials Begin
 
 for (let block of conditions) {
     let blockConditions = jsPsych.randomization.repeat(block.conditions, 3);
