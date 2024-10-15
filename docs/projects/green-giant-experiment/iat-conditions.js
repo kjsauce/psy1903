@@ -90,39 +90,3 @@ function generateConditions() {
 
     return conditions;
 }
-
-
-/**
-* The following are miscellaneous array functions utilized in the above code
-*/
-// Shuffle an array
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-// Remove an element from an array
-function remove(array, predicate) {
-    const index = array.findIndex(predicate);
-    if (index !== -1) {
-        array.splice(index, 1);
-    }
-}
-
-// Select a random element from an array
-function sample(array) {
-    const index = Math.floor(Math.random() * array.length);
-    return array[index];
-}
-
-// Search an object for a string
-function searchObject(haystack, needle) {
-    for (let key in haystack) {
-        if (haystack[key].includes(needle)) {
-            return key; // Return the key where the string was found
-        }
-    }
-}
