@@ -2,18 +2,54 @@ let jsPsych = initJsPsych();
 
 let timeline = [];
 
+// Welcome 
 let welcomeTrial = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-    <h1>Welcome to the Response Time Task!</h1> 
-    <p>In this experiment, you will see a blue or orange circle on the screen</p>
-    <p>If you see a blue circle, press the F key.</p>
-    <p>If you see a orange circle, press the J key.</p>
-    <p>Press SPACE to begin.</p>
+    <h1> Welcome to the Green Giant Experiment!</h1> 
+
+    <p>In this experiment, you will complete the following three tasks:</p>
+    <li> In Task 1, you will be asked to watch a short video.</li>
+    <li> In Task 2, you will answer a brief set of questions.</li>
+    <li> In Task 3, you will be asked to categorize a series of words. </li>
+</div>
+    <p>Press <span class='key'>SPACE</span> to begin.</p>
     `,
     choices: [' '],
 };
 timeline.push(welcomeTrial);
+
+let inductionTrial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+    <h1> Task 1 of 3</h1> 
+
+    <p>Please watch the following video. When you are done, press the <span class='key'>SPACE</span> key to move to the next task. </p>
+    `,
+    choices: [' '],
+};
+timeline.push(inductionTrial);
+
+let likert_scale = [
+    "Strongly Disagree",
+    "Disagree",
+    "Neutral",
+    "Agree",
+    "Strongly Agree"
+];
+
+
+let questionnaire = {
+    type: jsPsychSurveyLikert,
+    questions: [
+        { prompt: "I enjoy solving math problems.", name: 'Math Problem', labels: likert_scale },
+        { prompt: "I find math easy.", name: 'Easy', labels: likert_scale },
+
+    ],
+    randomize_question_order: false
+};
+
+timeline.push(questionnaire);
 
 for (let block of conditions) {
 
@@ -50,3 +86,5 @@ for (let block of conditions) {
         timeline.push(example);
     }
 }
+
+jsPsych.run(timeline);
