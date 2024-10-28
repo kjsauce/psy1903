@@ -22,7 +22,7 @@ timeline.push(welcomeTrial);
 
 // Task 1 - Priming 
 
-// Setting up the YouTube Videos for Randomization 
+// Setting up the YouTube Videos
 let videos = {
     video1: {
         iframe: "<iframe title= 'YouTube video player' width = '640' height='390' src='https://www.youtube.com/embed/XMcab1MFaLc' frameborder='0' allowFullScreen></iframe>",
@@ -34,7 +34,11 @@ let videos = {
     }
 };
 
+// Selecting random elements for array for chosen video 
 let selectedVideo = Math.random() < 0.5 ? videos.video1 : videos.video2;
+
+// Recording Selected Video as a Part of Trial Data
+console.log(selectedVideo)
 
 // Text on Screen for Priming Task
 let primingTask = {
@@ -56,68 +60,152 @@ timeline.push(primingTask);
 
 // Task 2 - Questionnaire 
 
-// let likertscaleA = [
-"Strongly Disagree (1)",
+// Building the Scales for Each Questionnaire
+let likertScaleA = [
+    "Strongly Disagree (1)",
     "Disagree",
     "Neutral (3)",
     "Agree",
     "Strongly Agree (5)"
-// ];
-
-// let likertscaleB = [
-    // "Never (1)",
-   // "Very Rarely",
-   // "Ocasionally (3)",
-  //  "Frequently",
-   // "Very Frequently (5)",
 ];
 
+let likertScaleB = [
+    "Never (1)",
+    "Very Rarely",
+    "Ocasionally (3)",
+    "Frequently",
+    "Very Frequently (5)",
+];
+
+// Setting up First Questionnaire Scale
 let questionnaireA = {
     type: jsPsychSurveyLikert,
-    //  questions: [
-    //  { prompt: "I enjoy solving math problems.", name: 'Math Problem', labels: likert_scale },
-    // { prompt: "I find math easy.", name: 'Easy', labels: likert_scale },
+    preamble: `<h1> Task 2 of 3 </h1>
+    <p> Please answer the following items on a scale of 'Strongly Disagree' (1) to "Strongly Agree' (5). </p>
+    `,
+    questions: [
+        { prompt: "How strongly do you feel it is to have a healthy diet?", labels: likertScaleA },
+        { prompt: "How strongly do you believe your food intake impacts your physical appearance and body?", labels: likertScaleA },
+        { prompt: "How much do you agree with the following statements: I make health choices when eating.", labels: likertScaleA },
+        { prompt: "I have a healthy body.", labels: likertScaleA },
+        { prompt: "I make unhealthy choices when eating.", labels: likertScaleA },
+        { prompt: "I have an unhealthy body.", labels: likertScaleA },
+    ],
 
-    //],
-    // randomize_question_order: false
-    //};
+    randomize_question_order: false,
+    data: {
+        collect: true,
+        trialType: 'questionnairePartA'
+    }
 
-    ////timeline.push(questionnaire);
+};
 
-    ///for (let block of conditions) {
 
-    // Screen with instructions, indicating the two categories
-    // and the expected keys to be pressed
-    // let leftCategory = block.categories[0];
-    // let rightCategory = block.categories[1];
+// Setting up Second Questionnaire Scale (with diff scale)
+let questionnaireB = {
+    type: jsPsychSurveyLikert,
+    preamble: '<h1>Task 2 of 3 (Continued...)</h1><p>Please answer the following items on a scale of "Never" (1) to "Frequently Agree" (5).</p>',
+    questions: [
+        { prompt: "How often do you think about your diet?", labels: likertScaleB },
+        { prompt: "How often do you eat foods with high sugar/fat?", labels: likertScaleB },
+        { prompt: "How often do you eat organic foods?.", labels: likertScaleB },
+        { prompt: "How often do you overeat past the point of being full?", labels: likertScaleB },
+        { prompt: "How often do you have home-cooked meals? ", labels: likertScaleB },
+        { prompt: "How often do you eat fast food meals? ", labels: likertScaleB },
+    ],
+    randomize_question_order: false,
+    data: {
+        collect: true,
+        trialType: 'questionnairePartB'
+    }
+};
 
-    // for (let trial of block.trials) {
-    // Screen that displays trial.word in the center
-    // as well as the left/right categories
-    // listening for key response (f,j)
-    // on_finish: process the response, store the appropriate data
+timeline.push(questionnaireA, questionnaireB);
 
-    // let example = {
-    //  type: jsPsychHtmlKeyboardResponse,
-    //  stimulus: `...`,
-    //  data: {
-    //      collect: true,
-    //     trialType: 'iat',
-    //     word: trial.word,
-    //      expectedCategory: trial.expectedCategory,
-    //      expectedCategoryAsDisplayed: trial.expectedCategoryAsDisplayed,
-    //      leftCategory: leftCategory,
-    //     rightCategory: rightCategory
-    //   },
-    //  on_finish: function (data) {
-    // if data.response == trial.expectedResponse
-    // data.correct = true
-    // else
-    // data.correct = false
-    // }
-    // }
-    //  timeline.push(example);
-    //  }
-    // }
+// Task 3 - IAT Questions 
 
-    jsPsych.run(timeline);
+//Setting up Intro Screen
+let introScreen = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+    <h1> Task 3 of 3 </h1> 
+    <p>In this final task, you will be shown a series of words and asked to sort them into categories. </p>
+    <p>Press <span class='key'>SPACE</span> to begin.</p>
+    `,
+    choices: [' '],
+};
+
+timeline.push(introScreen);
+
+let partNumber = 1;
+
+// Building Trial Blocks 
+for (let block of conditions) {
+
+    let leftCategory = block.categories[0];
+    let rightCategory = block.categories[1];
+
+    let blockInstructions = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `
+        <h1>Part ${partNumber++}</h1>
+        <p>In this part, the two categories will be: <span class="bold-text">${leftCategory}</span> and <span class="bold-text">${rightCategory}</span>.</p>
+        <p>If the word you see in the middle of the screen should be sorted into the <span class="bold-text">${leftCategory}</span>, press the <span class='key'>F</span> key</p>
+        <p>If the word should be sorted into the <span class="bold-text">${rightCategory}</span>, press the <span class='key'>J</span> key</p>
+        <p>Press <span class='key'>SPACE</span> to begin.</p>
+        `,
+        choices: [' '],
+    };
+    timeline.push(blockInstructions);
+
+    for (let trial of block.trials) {
+
+        // Word Trial
+        let wordTrial = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `
+            <div class="trial-container">
+                <div class="categories">
+                    <span class="category"><span class="bold-text">${leftCategory}</span> (press F)</span>
+                    <span class="category"><span class="bold-text">${rightCategory}</span> (press J)</span>
+                </div>
+                <div class="word">${trial.word}</div>
+            </div>
+            `,
+            choices: ['f', 'j'],
+            data: {
+                collect: true,
+                trialType: 'iat',
+                word: trial.word,
+                expectedCategory: trial.expectedCategory,
+                expectedCategoryAsDisplayed: trial.expectedCategoryAsDisplayed,
+                leftCategory: leftCategory,
+                rightCategory: rightCategory
+            },
+            on_finish: function (data) {
+                if (data.response == trial.expectedResponse) {
+                    data.correct = true;
+                } else {
+                    data.correct = false;
+                }
+            }
+        };
+        timeline.push(wordTrial);
+
+        // Fixation Trial
+        let fixationTrial = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `
+            <p><span class="plus-symbol"><span class="bold-text">+</span></span></p>
+            `,
+            trial_duration: 250,
+            stimulus_duration: 250,
+            choices: ['NO KEYS']
+        };
+        timeline.push(fixationTrial);
+    }
+}
+
+// Results Trial
+
+jsPsych.run(timeline);
