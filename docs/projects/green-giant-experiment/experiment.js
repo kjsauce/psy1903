@@ -219,7 +219,7 @@ let resultsTrial = {
         //  ⭐ Update the following three values as appropriate ⭐
         let prefix = 'iat';
         let dataPipeExperimentId = 'fv2sFPODD9HN';
-        let forceOSFSave = false;
+        let forceOSFSave = true;
 
         // Filter and retrieve results as CSV data
         let results = jsPsych.data
@@ -258,5 +258,26 @@ let resultsTrial = {
     }
 }
 timeline.push(resultsTrial);
+
+// Debrief Trial
+let debriefTrial = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+    <h1>Thank you!</h1>
+    <p>The experiment is now complete, you can close this tab.</p>
+    `,
+    choices: ['NO KEYS'],
+    on_start: function () {
+        let data = jsPsych.data
+            .get('label')
+            .filter({ collect: true })
+            .ignore(['response', 'stimulus', 'trial_type', 'trial_index', 'plugin_version', 'collect'])
+            .csv();
+        console.log(data);
+    }
+}
+
+timeline.push(debriefTrial);
+
 
 jsPsych.run(timeline);
