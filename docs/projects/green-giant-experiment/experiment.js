@@ -137,8 +137,6 @@ let introScreen = {
 
 timeline.push(introScreen);
 
-let partNumber = 1;
-
 // Building Trial Blocks 
 for (let block of conditions) {
 
