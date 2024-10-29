@@ -16,21 +16,24 @@ let welcomeTrial = {
 timeline.push(welcomeTrial);
 
 
-// Task 2 - Questionnaire 
-let animation_sequence1 = ["IMG1.jpg", "IMG2.jpg"];
+// Trial 1 Untrustworthy
+let animationSequence1 = [
+    'images/IMG1.png',
+    'images/IMG2.png'
+];
 
 let animationTrial1 = {
     type: jsPsychAnimation,
-    stimuli: animation_sequence1,
-    sequence_reps: 3,
-    frame_time: 500,
-    prompt: '<p>Watch the faces.</p>',
+    stimuli: animationSequence1,
+    sequence_reps: 5,
+    frame_time: 300,
+    prompt: '<p> Watch the faces.</p>',
 };
 timeline.push(animationTrial1);
 
 let questionTrial1 = {
     type: jsPsychSurveyHtmlForm,
-    preamble: '<p>After viewing these faces, what word would you use to categorize them?</p>',
+    preamble: '<p>After viewing these faces, what word would you use to categorize them out of the following: Trustworthy, Neutral, Untrustworthy ?</p>',
     html: `<p><input type='text' name='category' id='mood'></p>`,
     autofocus: 'category', // id of the field we want to auto-focus on when the trial starts
     button_label: 'Submit Answer',
@@ -43,65 +46,72 @@ let questionTrial1 = {
 }
 timeline.push(questionTrial1);
 
-//var animation_sequence2 = ["img/happy_face_1.jpg", "img/happy_face_2.jpg", "img/happy_face_3.jpg", "img/happy_face_4.jpg"];
+// Trial 2 - Trustworthy
+let animationSequence2 = [
+    'images/IMG4.png',
+    'images/IMG5.png'
+];
 
-//var animation_trial = {
-// type: jsPsychAnimation,
-// stimuli: animation_sequence,
-// sequence_reps: 3,
-// frame_time: 500,
-// prompt: '<p>Watch the faces.</p>',
-//};
+let animationTrial2 = {
+    type: jsPsychAnimation,
+    stimuli: animationSequence2,
+    sequence_reps: 5,
+    frame_time: 300,
+    prompt: '<p> Watch the faces.</p>',
+};
+timeline.push(animationTrial2);
 
-//var animation_sequence3 = ["img/happy_face_1.jpg", "img/happy_face_2.jpg", "img/happy_face_3.jpg", "img/happy_face_4.jpg"];
+let questionTrial2 = {
+    type: jsPsychSurveyHtmlForm,
+    preamble: '<p>After viewing these faces, what word would you use to categorize them out of the following: Trustworthy, Neutral, Untrustworthy ?</p>',
+    html: `<p><input type='text' name='category' id='mood'></p>`,
+    autofocus: 'category', // id of the field we want to auto-focus on when the trial starts
+    button_label: 'Submit Answer',
+    data: {
+        collect: true,
+    },
+    on_finish: function (data) {
+        data.category = data.response.category2;
+    }
+}
+timeline.push(questionTrial2);
 
-//var animation_trial = {
-// type: jsPsychAnimation,
-// stimuli: animation_sequence,
-// sequence_reps: 3,
-// frame_time: 500,
-// prompt: '<p>Watch the faces.</p>',
-//};
+// Trial 3 - Neutral 
+let animationSequence3 = [
+    'images/IMG6.png',
+    'images/IMG5.png',
+];
+
+let animationTrial3 = {
+    type: jsPsychAnimation,
+    stimuli: animationSequence3,
+    sequence_reps: 5,
+    frame_time: 300,
+    prompt: '<p> Watch the faces.</p>',
+};
+timeline.push(animationTrial3);
+
+let questionTrial3 = {
+    type: jsPsychSurveyHtmlForm,
+    preamble: '<p>After viewing these faces, what word would you use to categorize them out of the following: Trustworthy, Neutral, Untrustworthy ?</p>',
+    html: `<p><input type='text' name='category' id='mood'></p>`,
+    autofocus: 'category', // id of the field we want to auto-focus on when the trial starts
+    button_label: 'Submit Answer',
+    data: {
+        collect: true,
+    },
+    on_finish: function (data) {
+        data.category = data.response.category3;
+    }
+}
+timeline.push(questionTrial3);
+
+// Debrief and end screen
+let debrief = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `<h1>Thank you for participating!</h1><p>This is the end of the experiment.</p>`
+};
+timeline.push(debrief);
 
 
-//timeline.push(questionnaireA, questionnaireB);
-
-// Task 3 - IAT Questions 
-
-//Setting up Intro Screen
-//let introScreen = {
-// type: jsPsychHtmlKeyboardResponse,
-// stimulus: `
-// <h1> Task 3 of 3 </h1> 
-// <p>In this final task, you will be shown a series of words and asked to sort them into categories. </p>
-//  <p>Press <span class='key'>SPACE</span> to begin.</p>
-// `,
-// choices: [' '],
-//};
-
-//timeline.push(introScreen);
-
-
-
-// Debrief Trial
-//let debriefTrial = {
-// type: jsPsychHtmlKeyboardResponse,
-// stimulus: `
-// <h1>Thank you!</h1>
-// <p>The experiment is now complete, you can close this tab.</p>
-// `,
-// choices: ['NO KEYS'],
-// on_start: function () {
-//  jsPsych.progressBar.progress = 1;
-//  let data = jsPsych.data
-//  .get('label')
-//   .filter({ collect: true })
-//  .ignore(['response', 'stimulus', 'trial_type', 'trial_index', 'plugin_version', 'collect'])
-//  .csv();
-//  console.log(data);
-//  }
-//}
-
-
-
-jsPsych.run(timeline);
+jsPsych.run(timeline); 
