@@ -138,6 +138,8 @@ let introScreen = {
 timeline.push(introScreen);
 
 // Building Trial Blocks 
+let partNumber = 1;
+
 for (let block of conditions) {
 
     let leftCategory = block.categories[0];
