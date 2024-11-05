@@ -22,6 +22,23 @@ let welcomeTrial = {
 
 timeline.push(welcomeTrial);
 
+// Consent Screen
+let consentScreen = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+    <h1 class='welcome'> Conset <span class= 'greengiant'>Green Giant Experiment</span>!</h1> 
+    <p>In this experiment, you will complete the following three tasks:</p>
+    <div class = "task-box">
+         <li> In Task 1, you will be asked to watch a short video.</li>
+         <li> In Task 2, you will answer a brief set of questions.</li>
+         <li> In Task 3, you will be asked to categorize a series of words. </li>
+</div>
+    <p>Press <span class='key'>SPACE</span> to begin.</p>
+    `,
+    choices: [' '],
+};
+
+timeline.push(welcomeTrial);
 // Task 1 - Priming 
 
 // Setting up the YouTube Videos

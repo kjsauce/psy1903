@@ -1,4 +1,4 @@
-Name of project
+Green Giant Experiment
 Created by 
 Wendy Carballo and Kayla Saucedo
 
