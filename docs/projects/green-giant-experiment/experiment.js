@@ -26,19 +26,15 @@ timeline.push(welcomeTrial);
 let consentScreen = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-    <h1 class='welcome'> Conset <span class= 'greengiant'>Green Giant Experiment</span>!</h1> 
-    <p>In this experiment, you will complete the following three tasks:</p>
-    <div class = "task-box">
-         <li> In Task 1, you will be asked to watch a short video.</li>
-         <li> In Task 2, you will answer a brief set of questions.</li>
-         <li> In Task 3, you will be asked to categorize a series of words. </li>
-</div>
-    <p>Press <span class='key'>SPACE</span> to begin.</p>
+    <h1> Consent Form </h1> 
+    <p> This experiment is an educational exercise about learning to program and analyze a psychological experiment and not a “real” scientific experiment. No identifying information is collected, and data will not be shared beyond our class. If you agree to help out by completing the tasks and questionnaires, please click Continue. Otherwise, you may close this tab. If you have any questions, please reach out to Dr. Garth Coombs <garthcoombs@fas.harvard.edu>, one of the head instructors of PSY 1903: Programming for Psychological Scientists.</p>
+    <p> Please press <span class='key'>SPACE</span> to continue </p>
     `,
     choices: [' '],
 };
 
-timeline.push(welcomeTrial);
+timeline.push(consentScreen);
+
 // Task 1 - Priming 
 
 // Setting up the YouTube Videos
@@ -81,34 +77,30 @@ timeline.push(primingTask);
 
 // Building the Scales for Each Questionnaire
 let likertScaleA = [
-    "Strongly Disagree (1)",
-    "Disagree",
-    "Neutral (3)",
-    "Agree",
-    "Strongly Agree (5)"
-];
-
-let likertScaleB = [
-    "Never (1)",
-    "Very Rarely",
-    "Ocasionally (3)",
-    "Frequently",
-    "Very Frequently (5)",
+    "Not at all True of Myself (1)",
+    "Slightly True of Myself",
+    "About Halfway True of Myself (3)",
+    "Mostly True of Myself",
+    "Completely True of Myself (5)"
 ];
 
 // Setting up First Questionnaire Scale
 let questionnaireA = {
     type: jsPsychSurveyLikert,
     preamble: `<h1> Task 2 of 3 </h1>
-    <p> Please answer the following items on a scale of 'Strongly Disagree' (1) to "Strongly Agree' (5). </p>
+    <p> Please answer the following items on a scale of 'Not at all True of Myself' (1) to "About Halfway True of Myself" (3) to "Completely True of Myself' (5). </p>
     `,
     questions: [
-        { prompt: "How strongly do you feel it is to have a healthy diet?", labels: likertScaleA },
-        { prompt: "How strongly do you believe your food intake impacts your physical appearance and body?", labels: likertScaleA },
-        { prompt: "How much do you agree with the following statements: I make health choices when eating.", labels: likertScaleA },
-        { prompt: "I have a healthy body.", labels: likertScaleA },
-        { prompt: "I make unhealthy choices when eating.", labels: likertScaleA },
-        { prompt: "I have an unhealthy body.", labels: likertScaleA },
+        { prompt: "I think my body is unattractive.", labels: likertScaleA },
+        { prompt: "How well my body is functioning influences the way I feel about my body.", labels: likertScaleA },
+        { prompt: "Having a well-proprtioned body is importatnt to me.", labels: likertScaleA },
+        { prompt: "My overall fitness level is high.", labels: likertScaleA },
+        { prompt: "I compare my body to people I'm close to.", labels: likertScaleA },
+        { prompt: "My naked body makes me feel sad.", labels: likertScaleA },
+        { prompt: "I feel better about my body when I'm fitter.", labels: likertScaleA },
+        { prompt: "My body is healthy.", labels: likertScaleA },
+        { prompt: "My body is in shape.", labels: likertScaleA },
+        { prompt: "My body is overweight.", labels: likertScaleA },
     ],
 
     randomize_question_order: false,
@@ -120,26 +112,7 @@ let questionnaireA = {
 };
 
 
-// Setting up Second Questionnaire Scale (with diff scale)
-let questionnaireB = {
-    type: jsPsychSurveyLikert,
-    preamble: '<h1>Task 2 of 3 (Continued...)</h1><p>Please answer the following items on a scale of "Never" (1) to "Frequently Agree" (5).</p>',
-    questions: [
-        { prompt: "How often do you think about your diet?", labels: likertScaleB },
-        { prompt: "How often do you eat foods with high sugar/fat?", labels: likertScaleB },
-        { prompt: "How often do you eat organic foods?.", labels: likertScaleB },
-        { prompt: "How often do you overeat past the point of being full?", labels: likertScaleB },
-        { prompt: "How often do you have home-cooked meals? ", labels: likertScaleB },
-        { prompt: "How often do you eat fast food meals? ", labels: likertScaleB },
-    ],
-    randomize_question_order: false,
-    data: {
-        collect: true,
-        trialType: 'questionnairePartB'
-    }
-};
-
-timeline.push(questionnaireA, questionnaireB);
+timeline.push(questionnaireA);
 
 // Task 3 - IAT Questions 
 
