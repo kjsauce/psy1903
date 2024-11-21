@@ -2,7 +2,7 @@
 
 
 ## AI Prompts
-- None
+- Using as.numeric function in R
 
 ## Outside Sites
 - None

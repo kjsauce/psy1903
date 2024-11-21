@@ -93,7 +93,7 @@ let questionnaireA = {
     questions: [
         { prompt: "I think my body is unattractive.", labels: likertScaleA },
         { prompt: "How well my body is functioning influences the way I feel about my body.", labels: likertScaleA },
-        { prompt: "Having a well-proprtioned body is importatnt to me.", labels: likertScaleA },
+        { prompt: "Having a well-proportioned body is important to me.", labels: likertScaleA },
         { prompt: "My overall fitness level is high.", labels: likertScaleA },
         { prompt: "I compare my body to people I'm close to.", labels: likertScaleA },
         { prompt: "My naked body makes me feel sad.", labels: likertScaleA },
