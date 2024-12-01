@@ -99,53 +99,53 @@ colnames(dScores) <- c("participant_ID", "d_score")
 ## Initiate variable i to represent row numbers for each iteration, starting with 1
 i = 1
 
-## Step 1: Create a for loop that iterates across each file in file_list
-
-# Temp file for testing, remove later 
-file <-files_list[[1]]
-  
-for (file in files_list) {
-# Step 2:Use read.csv to read in your file 
-tmp <- read.csv(file)
-  
-# RT Column is Numeric
-tmp$rt <- round(as.numeric(tmp$rt),0)
-  
-# Correct Column is Logical
-tmp$correct <- round(as.logical(tmp$correct))
-  
-# Appropriate Columns are Factors 
-tmp$expectedCategory <- as.factor(tmp$expectedCategory)
-tmp$expectedCategoryAsDisplayed <- as.factor(tmp$expectedCategoryAsDisplayed)
-tmp$leftCategory <- as.factor(tmp$leftCategory)
-tmp$rightCategory <- as.factor(tmp$rightCategory)
-
-# Step 3: Assign participant ID as the basename of the file
-participant_ID <- tools::file_path_sans_ext(basename(file))
-  
-# Step 4: Isolate the participant_ID column for the current row number (i) and assign it to be the current participant_ID variable
-dScores[i,"participant_ID"] <- participant_ID
-  
-# Step 5: Using similar logic, isolate the d_score OR c("emotionA_d_score", "emotionB_d_score") column(s) for the current row number (i) and assign it to be the current d-score(s) by using our calculate_IAT_dscore or calculate_EST_dscore on the tmp data file
-dScores[i,"d_score"] <- calculate_IAT_dscore(tmp)
-
-#Following the logic of assigning the participant_ID to a single cell, assign the dScores "whichPrime" column to be the current participant's prime label. 
-dScores[i,"whichPrime"] <- tmp[tmp$,"whichPrime"]
-
-#Following the logic of assigning the "d_score" column to be the output of the calculate_*_dScore function, assign the "questionnaire" column to be the output of the score_questionnaire function
-
-
-# Step 6: Remove the temporary data file tmp
-rm(tmp)
-
-#Step 7: # Increase our row number variable i by one for the next iteration
-i <- i + 1
-}
-
-
-## Outside of the for loop, save the new dScores data frame using write.csv() into your data_cleaning/data subdirectory:
-write.csv(dScores,"~/Desktop/psy1903/stats/data_cleaning/data/participant_dScores.csv", row.names = FALSE)
-
+# ## Step 1: Create a for loop that iterates across each file in file_list
+# 
+# # Temp file for testing, remove later 
+# file <-files_list[[1]]
+#   
+# for (file in files_list) {
+# # Step 2:Use read.csv to read in your file 
+# tmp <- read.csv(file)
+#   
+# # RT Column is Numeric
+# tmp$rt <- round(as.numeric(tmp$rt),0)
+#   
+# # Correct Column is Logical
+# tmp$correct <- round(as.logical(tmp$correct))
+#   
+# # Appropriate Columns are Factors 
+# tmp$expectedCategory <- as.factor(tmp$expectedCategory)
+# tmp$expectedCategoryAsDisplayed <- as.factor(tmp$expectedCategoryAsDisplayed)
+# tmp$leftCategory <- as.factor(tmp$leftCategory)
+# tmp$rightCategory <- as.factor(tmp$rightCategory)
+# 
+# # Step 3: Assign participant ID as the basename of the file
+# participant_ID <- tools::file_path_sans_ext(basename(file))
+#   
+# # Step 4: Isolate the participant_ID column for the current row number (i) and assign it to be the current participant_ID variable
+# dScores[i,"participant_ID"] <- participant_ID
+#   
+# # Step 5: Using similar logic, isolate the d_score OR c("emotionA_d_score", "emotionB_d_score") column(s) for the current row number (i) and assign it to be the current d-score(s) by using our calculate_IAT_dscore or calculate_EST_dscore on the tmp data file
+# dScores[i,"d_score"] <- calculate_IAT_dscore(tmp)
+# 
+# #Following the logic of assigning the participant_ID to a single cell, assign the dScores "whichPrime" column to be the current participant's prime label. 
+# dScores[i,"whichPrime"] <- tmp$displayedVideo[tmp$trialType == "prime" & tmp$displayedVideo != " "]
+# 
+# #Following the logic of assigning the "d_score" column to be the output of the calculate_*_dScore function, assign the "questionnaire" column to be the output of the score_questionnaire function
+# dScores[i,"questionnaire"] <- score_questionnaire(tmp)
+# 
+# # Step 6: Remove the temporary data file tmp
+# rm(tmp)
+# 
+# #Step 7: # Increase our row number variable i by one for the next iteration
+# i <- i + 1
+# }
+# 
+# 
+# ## Outside of the for loop, save the new dScores data frame using write.csv() into your data_cleaning/data subdirectory:
+# write.csv(dScores,"~/Desktop/psy1903/stats/data_cleaning/data/participant_dScores.csv", row.names = FALSE)
+# 
 
 #### Questionnaire Scoring -----------------------------------------------------
 
@@ -205,4 +205,52 @@ return(score)
 }
 
 score_questionnaire(questionnaire_data)
+
+## Step 1: Create a for loop that iterates across each file in file_list
+
+# Temp file for testing, remove later 
+file <-files_list[[1]]
+
+for (file in files_list) {
+  # Step 2:Use read.csv to read in your file 
+  tmp <- read.csv(file)
+  
+  # RT Column is Numeric
+  tmp$rt <- round(as.numeric(tmp$rt),0)
+  
+  # Correct Column is Logical
+  tmp$correct <- round(as.logical(tmp$correct))
+  
+  # Appropriate Columns are Factors 
+  tmp$expectedCategory <- as.factor(tmp$expectedCategory)
+  tmp$expectedCategoryAsDisplayed <- as.factor(tmp$expectedCategoryAsDisplayed)
+  tmp$leftCategory <- as.factor(tmp$leftCategory)
+  tmp$rightCategory <- as.factor(tmp$rightCategory)
+  
+  # Step 3: Assign participant ID as the basename of the file
+  participant_ID <- tools::file_path_sans_ext(basename(file))
+  
+  # Step 4: Isolate the participant_ID column for the current row number (i) and assign it to be the current participant_ID variable
+  dScores[i,"participant_ID"] <- participant_ID
+  
+  # Step 5: Using similar logic, isolate the d_score OR c("emotionA_d_score", "emotionB_d_score") column(s) for the current row number (i) and assign it to be the current d-score(s) by using our calculate_IAT_dscore or calculate_EST_dscore on the tmp data file
+  dScores[i,"d_score"] <- calculate_IAT_dscore(tmp)
+  
+  #Following the logic of assigning the participant_ID to a single cell, assign the dScores "whichPrime" column to be the current participant's prime label. 
+  dScores[i,"whichPrime"] <- tmp$displayedVideo[tmp$trialType == "prime" & tmp$displayedVideo != " "]
+  
+  #Following the logic of assigning the "d_score" column to be the output of the calculate_*_dScore function, assign the "questionnaire" column to be the output of the score_questionnaire function
+  dScores[i,"questionnaire"] <- score_questionnaire(tmp)
+  
+  # Step 6: Remove the temporary data file tmp
+  rm(tmp)
+  
+  #Step 7: # Increase our row number variable i by one for the next iteration
+  i <- i + 1
+}
+
+
+## Outside of the for loop, save the new dScores data frame using write.csv() into your data_cleaning/data subdirectory:
+write.csv(dScores,"~/Desktop/psy1903/stats/data_cleaning/data/participant_dScores.csv", row.names = FALSE)
+
 
