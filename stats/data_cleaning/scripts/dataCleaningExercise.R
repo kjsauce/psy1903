@@ -73,7 +73,7 @@ colnames(dScores) <- c("participant_ID", "d_score")
 calculate_IAT_dscore <- function(data) {
   
 # Step 1: Only select trials with rt > 300 and < 5000
-tmp <- data[data$rt > 300 & data$rt < 5000,]
+tmp <- data[data$rt > 300 & data$rt < 5000 & data$correct == TRUE,]
 
 # Step 2: Separate congruent and incongruent trials (subset tmp into two new data frames: congruent_trials and incongruent_trials) 
 congruent_trials <- tmp[tmp$expectedCategoryAsDisplayed == "healthy or fit" |
@@ -215,7 +215,7 @@ TukeyHSD(av_model)
 
 # Correlation 
 cor.test(dScores$d_score,
-log10(dScores$questionnaire)) 
+ (dScores$questionnaire)) 
 
 # Base R Histogram
 png("~/Desktop/psy1903/stats/data_cleaning/output/Fig1_baseR_histogram.png", width = 600, height = 500)
