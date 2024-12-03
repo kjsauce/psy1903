@@ -111,7 +111,7 @@ pulled_data <- q_data[q_data$trialType == "questionnairePartA", "response"]
   print(questionnaire)
   
 ## Reverse score if necessary
- rev_items <- c("Q0","Q4","Q5","Q6")
+ rev_items <- c("Q0","Q4","Q5","Q9")
  for (rev_item in rev_items) {
 questionnaire[, rev_item] <- 5 - questionnaire[, rev_item]
 }
@@ -214,6 +214,8 @@ summary(av_model)
 TukeyHSD(av_model)
 
 # Correlation 
+cor.test(dScores$d_score,
+log10(dScores$questionnaire)) 
 
 # Base R Histogram
 png("~/Desktop/psy1903/stats/data_cleaning/output/Fig1_baseR_histogram.png", width = 600, height = 500)
@@ -224,10 +226,100 @@ hist(hist_dscore,
      xlab = "D-Scores",
      ylab = "Frequency")
 
-dev.off() 
+dev.off()
 
 # GGPlot Histogram
+png("~/Desktop/psy1903/stats/data_cleaning/output/Fig2_ggplot_histogram.png", width = 600, height = 500)
+
+ggplot(data=dScores, aes (x = d_score)) +
+  geom_histogram(binwidth = 0.15, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of D-Scores",
+       x = "D-Scores",
+       y = "Frequency") + theme_minimal()
+  
+dev.off() 
+  
 # GGPlot Histogram by Prime
+png("~/Desktop/psy1903/stats/data_cleaning/output/Fig3_ggplot_histogram_by_prime.png", width = 600, height = 500)
+
+ggplot(data=dScores, aes (x = d_score)) +
+  geom_histogram(binwidth = 0.15, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of D-Scores",
+       x = "D-Scores",
+       y = "Frequency") + theme_classic() +facet_wrap(~whichPrime)
+
+dev.off() 
+
 # GGPlot Boxplot
+png("~/Desktop/psy1903/stats/data_cleaning/output/Fig4_ggplot_boxplot.png", width = 600, height = 500)
+
+ggplot(data=dScores, aes (x = whichPrime, y=d_score, fill=whichPrime)) +
+  geom_boxplot() + 
+  labs(title = "Effect of Prime on D-Scores",
+       x = "Prime Condition",
+       y = "D-Scores") + 
+  theme_classic() + 
+  theme(legend.position = "none") + 
+  scale_x_discrete(labels = c("video1" = "Healthy-Fit Prime",
+                              "video2" = "Unhealthy-Fat Prime"))
+
+dev.off() 
+
 # GGPlot Scatterplot
+png("~/Desktop/psy1903/stats/data_cleaning/output/Fig5_ggplot_scatter.png", width = 600, height = 500)
+
+ggplot(data=dScores, aes (x = questionnaire, y=d_score)) +
+  geom_point() + 
+  geom_smooth(method ="lm") +
+  labs(title = "Correlation Between Questionnaire and D-Scores",
+       x = "Questionnaire",
+       y = "D-Scores") + 
+  theme_classic()
+
+dev.off() 
+
 # GGPlot Theme
+theme_kayla <- function (base_size = 14, 
+                         base_family = "",
+                         base_line_size = base_size/170, 
+                         base_rect_size = base_size/170){
+theme_minimal(base_size = base_size, 
+                base_family = base_family, 
+                base_line_size = base_line_size) %+replace%
+theme(
+      axis.title.y = element_text(angle = 0, vjust = 0, hjust = 0.5, size = 14, color = "lightpink"),
+      axis.title.x = element_text(hjust = 0.5, size = 14, color = "salmon"),
+      axis.text = element_text(size = 14, color = "magenta"),
+      axis.ticks = element_line(color = "black"),
+      plot.title = element_text(hjust = 0.5, size = 30, color = "maroon"), 
+      
+      complete = TRUE
+)
+}
+
+png("~/Desktop/psy1903/stats/data_cleaning/output/Fig6_custom_theme.png", width = 600, height = 500)
+
+ggplot(data=dScores, aes (x = whichPrime, y=d_score, fill=whichPrime)) +
+  geom_boxplot() + 
+  labs(title = "Effect of Prime on D-Scores",
+       x = "Prime Condition",
+       y = "D-Scores") + 
+  theme_kayla() + 
+  theme(legend.position = "none") + 
+  scale_x_discrete(labels = c("video1" = "Healthy-Fit Prime",
+                              "video2" = "Unhealthy-Fat Prime"))
+
+dev.off() 
+
+png("~/Desktop/psy1903/stats/data_cleaning/output/Fig7_custom_theme.png", width = 600, height = 500)
+
+ggplot(data=dScores, aes (x = questionnaire, y=d_score)) +
+  geom_point() + 
+  geom_smooth(method ="lm") +
+  labs(title = "Correlation Between Questionnaire and D-Scores",
+       x = "Questionnaire",
+       y = "D-Scores") + 
+  theme_kayla()
+
+dev.off() 
+
