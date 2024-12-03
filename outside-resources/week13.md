@@ -19,3 +19,8 @@ log10(questionnaire$dScores))  and I'm getting this error Error: object 'd_score
 
 ## Outside Sites
 - https://www.rdocumentation.org/packages/ggplot2/versions/3.5.0/topics/facet_wrap
+- https://www.youtube.com/watch?v=tyt1NbUouIc 
+- https://github.com/susanBuck/psy1903-demos-public/blobed7198f42874a43bb7ee31fa5befb9fd23e3ccb9/shared-files/ggplot2-cheatsheet.pdf 
+- https://ggplot2.tidyverse.org/reference/theme.html 
+- https://www.youtube.com/watch?v=gb6aUzO2c94 
+- https://www.youtube.com/watch?v=EbUGtdQbeu4 
